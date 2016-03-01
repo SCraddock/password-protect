@@ -1,0 +1,34 @@
+SetEnv DEFAULT_PHP_VERSION 55
+
+# DEFAULT WORDPRESS HTACCESS RULES
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+
+
+
+# PASSWORD PROTECT THE .htaccess FROM URLS + DIRECT FILEPATHS FROM BROWSERS
+<FilesMatch ".htaccess">
+AuthName "Member Only"
+AuthType Basic
+AuthUserFile /home/sites/orbital.vision/public_html/subdomains/billing/.htpasswd
+require valid-user
+</FilesMatch>
+
+# PASSWORD PROTECT THE .htpasswd FROM URLS + DIRECT FILEPATHS FROM BROWSERS
+<FilesMatch ".htpasswd">
+AuthName "Member Only"
+AuthType Basic
+AuthUserFile /home/sites/orbital.vision/public_html/subdomains/billing/.htpasswd
+require valid-user
+</FilesMatch>
+# BEGIN WordPress
+
+# END WordPress
